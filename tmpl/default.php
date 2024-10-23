@@ -12,12 +12,12 @@ defined('_JEXEC') or die;
 
 //$contacts - массив всех контактов.
 
-$today = date("Y-m-d"); //Текущая дата
+$today = date("m-d"); //Текущая дата
 $arr_contacts_name = []; //Массив с именами контактов
 
 foreach ($contacts as $key => $contact) {
     $name = $contact->name; //Имя контакта
-    $birthday = date_format(date_create($contact->created), 'Y-m-d'); //Дата создания контакта
+    $birthday = date_format(date_create($contact->created), 'm-d'); //Дата создания контакта
     if ($today == $birthday) array_push($arr_contacts_name, $name); //Если дата создания контакта (ДР) равна текущей дате, то добавляем имя контакта в массив
 }
 ?>

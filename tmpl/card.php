@@ -16,10 +16,10 @@ defined('_JEXEC') or die;
 
 //$contacts - массив всех контактов.
 
-$today = date("Y-m-d"); //Текущая дата
+$today = date("m-d"); //Текущая дата
 
 foreach ($contacts as $key => $contact) :
-    $birthday = date_format(date_create($contact->created), 'Y-m-d');
+    $birthday = date_format(date_create($contact->created), 'm-d');
     $contact->slug = $contact->id . ':' . $contact->alias;
     $contact->link = Route::_(RouteHelper::getContactRoute($contact->slug, $contact->catid));
     if ($today == $birthday) :
