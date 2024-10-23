@@ -19,7 +19,7 @@ use Joomla\DI\ServiceProviderInterface;
 /**
  * The Ks contacts birthday module service provider.
  *
- * @since  1.0.3
+ * @since  1.0.4
  */
 return new class() implements ServiceProviderInterface
 {
@@ -30,7 +30,7 @@ return new class() implements ServiceProviderInterface
      *
      * @return  void
      *
-     * @since   1.0.3
+     * @since   1.0.4
      */
     public function register(Container $container)
     {

@@ -19,7 +19,7 @@ use Joomla\CMS\Factory;
 /**
  * Helper for mod_contacts_birthday
  *
- * @since  1.0.3
+ * @since  1.0.4
  */
 class ContactsBirthdayHelper
 {
