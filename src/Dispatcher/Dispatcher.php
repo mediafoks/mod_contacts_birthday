@@ -10,12 +10,9 @@
 
 namespace Joomla\Module\ContactsBirthday\Site\Dispatcher;
 
-use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Dispatcher\AbstractModuleDispatcher;
-use Joomla\CMS\Extension\ModuleInterface;
-use Joomla\Input\Input;
-use Joomla\Registry\Registry;
-use Joomla\Module\ContactsBirthday\Site\Helper\ContactsBirthdayHelper;
+use Joomla\CMS\Helper\HelperFactoryAwareInterface;
+use Joomla\CMS\Helper\HelperFactoryAwareTrait;
 
 // phpcs:disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
@@ -24,29 +21,27 @@ use Joomla\Module\ContactsBirthday\Site\Helper\ContactsBirthdayHelper;
 /**
  * Dispatcher class for mod_contacts_birthday
  *
- * @since  1.1.0
+ * @since  2.0.0
  */
-class Dispatcher extends AbstractModuleDispatcher
+class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareInterface
 {
+    use HelperFactoryAwareTrait;
+
     /**
      * Returns the layout data.
      *
      * @return  array
      *
-     * @since   1.1.0
+     * @since   2.0.0
      */
-    private $moduleExtension;
-
-    public function __construct(\stdClass $module, CMSApplicationInterface $app, Input $input)
-    {
-        parent::__construct($module, $app, $input);
-    }
 
     protected function getLayoutData()
     {
         $data = parent::getLayoutData();
-        $helper = $this->app->bootModule('mod_contacts_birthday', 'Site')->getHelper('ContactsBirthdayHelper');
-        $data['contacts'] = $helper->getContacts($data['params'], $this->getApplication());
+        $data['suffixText'] = $data['params']->get('suffix_text', '');
+        $data['contacts'] = $this->getHelperFactory()
+            ->getHelper('ContactsBirthdayHelper')
+            ->getContacts($data['params'], $this->getApplication());
         return $data;
     }
 }

@@ -10,7 +10,8 @@
 
 namespace Joomla\Module\ContactsBirthday\Site\Helper;
 
-use Joomla\CMS\Factory;
+use Joomla\Database\DatabaseAwareInterface;
+use Joomla\Database\DatabaseAwareTrait;
 
 // phpcs:disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
@@ -19,13 +20,15 @@ use Joomla\CMS\Factory;
 /**
  * Helper for mod_contacts_birthday
  *
- * @since  1.1.0
+ * @since  2.0.0
  */
-class ContactsBirthdayHelper
+class ContactsBirthdayHelper implements DatabaseAwareInterface
 {
+    use DatabaseAwareTrait;
+
     public function getContacts($params): array
     {
-        $db = Factory::getContainer()->get('DatabaseDriver');
+        $db = $this->getDatabase();
 
         $catId = join(',', $params->get('catid'));
 
