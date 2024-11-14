@@ -15,6 +15,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 defined('_JEXEC') or die;
 
 //$contacts - массив всех контактов.
+if (!$contacts) return;
 
 $today = date("m-d"); //Текущая дата
 
